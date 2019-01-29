@@ -1,71 +1,27 @@
 import React, { Component } from 'react';
-import Scoreboard from "./components/Scoreboard";
-import Card from "./components/Card";
-import API from "./utils/API";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Game from "./pages/Game";
+import Submit from "./pages/Submit";
 
 class App extends Component {
 
-  state = {
-    randomId: 1,
-    score: 0,
-    tally: 0,
-    chihuahuas: []
-  };
-
-  componentDidMount() {
-    API
-      .getChihuahuas()
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          chihuahuas: res.data
-        });
-        this.setNewRandomId(this.state.chihuahuas);
-      });
-  }
-  
-  handleClicked = id => {
-    this.setState({
-      tally: this.state.tally + 1
-    });
-    if(this.state.randomId === id) {
-      this.setState({
-        score: this.state.score + 1
-      });
-      this.setNewRandomId(this.state.chihuahuas);
-    }
-  }
-
-  setNewRandomId = (array) => {
-    const randomId = array[Math.floor(Math.random()*array.length)]._id;
-    this.setState({
-      randomId: randomId
-    });
-  }
-  
-
   render() {
     return (
-      <div className="container">
-        <Scoreboard 
-          title="Chihuahua Clicker 2019"
-          score={this.state.score} 
-          tally={this.state.tally} 
-          randomId={this.state.randomId} 
-        />
-        <div className="row">
-          {this.state.chihuahuas.map(chihuahua => (
-            <Card 
-              key={chihuahua._id}
-              id={chihuahua._id}
-              name={chihuahua.name}
-              image={chihuahua.imgUrl}
-              handleClicked={this.handleClicked}
-            />
-          ))}
+      <Router>
+        <div>
+          <ul className="nav">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/submit">Submit</Link>
+            </li>
+          </ul>
+          <Route exact path="/" component={Game} />
+          <Route exact path="/submit" component={Submit} />
         </div>
-      </div>
-    );
+      </Router>
+    )
   }
 }
 
