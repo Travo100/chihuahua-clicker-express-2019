@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import cards from "./cards.json";
 import Scoreboard from "./components/Scoreboard";
 import Card from "./components/Card";
+import API from "./utils/API";
 
 class App extends Component {
 
@@ -9,11 +9,19 @@ class App extends Component {
     randomId: 1,
     score: 0,
     tally: 0,
-    chihuahuas: cards
+    chihuahuas: []
   };
 
   componentDidMount() {
-    this.setNewRandomId(this.state.chihuahuas);
+    API
+      .getChihuahuas()
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          chihuahuas: res.data
+        });
+        this.setNewRandomId(this.state.chihuahuas);
+      });
   }
   
   handleClicked = id => {
@@ -29,7 +37,7 @@ class App extends Component {
   }
 
   setNewRandomId = (array) => {
-    const randomId = array[Math.floor(Math.random()*array.length)].id;
+    const randomId = array[Math.floor(Math.random()*array.length)]._id;
     this.setState({
       randomId: randomId
     });
@@ -48,10 +56,10 @@ class App extends Component {
         <div className="row">
           {this.state.chihuahuas.map(chihuahua => (
             <Card 
-              key={chihuahua.id}
-              id={chihuahua.id}
+              key={chihuahua._id}
+              id={chihuahua._id}
               name={chihuahua.name}
-              image={chihuahua.image}
+              image={chihuahua.imgUrl}
               handleClicked={this.handleClicked}
             />
           ))}
