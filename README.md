@@ -1,4 +1,13 @@
-# Create React Express App
+# react-extended-session ⚛️
+Code, Deployed site, and video for the extended session for react!
+
+GitHub: https://github.com/Travo100/chihuahua-clicker-express-2019
+
+Deployed Site: https://chihuahua-clicker-express-2019.herokuapp.com/
+
+Videos: https://codingbootcamp.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=712375af-81f9-4b94-a9fc-a9e401753387
+
+https://codingbootcamp.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ebc91591-f1ef-440d-8d14-a9e4017f799e
 
 ## About This Boilerplate
 
